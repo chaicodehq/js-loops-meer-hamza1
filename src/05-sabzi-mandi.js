@@ -30,5 +30,43 @@
  *   // => { items: [], totalBill: 0 }
  */
 export function sabziMandiBill(shoppingList, priceList) {
-  // Your code here
+  // Your code her
+
+  if (!Array.isArray(shoppingList) || typeof priceList !== "object") {
+    return { items: [], totalBill: 0 };
+  }
+
+  const items = [];
+  let totalBill = 0;
+
+  for (const item of shoppingList) {
+
+    const name = item.name;
+    const qty = item.qty;
+    const price = priceList[name];
+
+    if (price === undefined) {
+      continue;
+    }
+
+    if (price > 80) {
+      continue;
+    }
+
+    const cost = price * qty;
+
+    items.push({
+      name: name,
+      qty: qty,
+      cost: cost
+    });
+
+    totalBill += cost;
+  }
+
+  return {
+    items: items,
+    totalBill: totalBill
+  };
+
 }
